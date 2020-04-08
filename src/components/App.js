@@ -15,14 +15,14 @@ const App = () => {
         <main>
           <div className="dividing-box">
             <div className="glasses">
-              <div className="square">
+              <div className="circle">
                 <h2>GLASSES</h2>
               </div>
             </div>
             <div className="sunglasses">
               <div className="light">
               </div>
-              <div className="square square-sun">
+              <div className="circle circle-sun">
                 <h2>SUNGLASSES</h2>
               </div>
             </div>

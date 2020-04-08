@@ -1,8 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import '../styles/App.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGlasses } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlasses } from '@fortawesome/free-solid-svg-icons';
+import Glasses from './Glasses';
+import Sunglasses from './Sunglasses';
 
 const App = () => {
 
@@ -16,7 +18,7 @@ const App = () => {
           <div className="dividing-box">
             <div className="glasses">
               <Link className="link-to-section" to="/glasses">
-                <div className="circle">
+                <div className="circle circle-view">
                   <h2>GLASSES</h2>
                 </div>
               </Link>
@@ -32,8 +34,14 @@ const App = () => {
           </div>
         </main>
       </div>
-      {/* <Route path="/glasses" exact component={Glasses} />
-      <Route path="/glasses" exact component={Sunglasses} /> */}
+      <Switch>
+        <Route path="/glasses">
+          <Glasses />
+        </Route>
+        <Route path="/sunglasses">
+          <Sunglasses />
+        </Route>
+      </Switch>
     </BrowserRouter>
   );
 }

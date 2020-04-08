@@ -1,9 +1,25 @@
 .card {
     max-height: 480px;
-    background-color: rgba(100, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    border-radius: 10px;
 
-    img {
+    .glasses-name {
+        font-size: 2rem;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .glasses-picture {
         width: 100%;
         height: auto;
+    }
+
+    .info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        font-size: 1.4rem;
     }
 }

@@ -16,7 +16,7 @@
         },
         {
             "_id": "gla_3",
-            "name": "john",
+            "name": "lisa",
             "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373302/mr-brilli/with-flowers.jpg",
             "price": 79.9,
             "stock": 10
@@ -37,7 +37,7 @@
         },
         {
             "_id": "gla_6",
-            "name": "louie",
+            "name": "xia",
             "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/girl-colors-indoor.jpg",
             "price": 89.9,
             "stock": 10
@@ -46,43 +46,43 @@
     "Sunglasses": [
         {
             "_id": "sun_1",
-            "name": "Paula",
-            "picture": "",
+            "name": "paula",
+            "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373302/mr-brilli/yellow-bkg.jpg",
             "price": 119.9,
             "stock": 10
         },
         {
             "_id": "sun_2",
             "name": "george",
-            "picture": "",
+            "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/black-white.jpg",
             "price": 99.9,
             "stock": 10
         },
         {
             "_id": "sun_3",
             "name": "hannah",
-            "picture": "",
+            "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373301/mr-brilli/glasses-and-hut.jpg",
             "price": 89.9,
             "stock": 10
         },
         {
             "_id": "sun_4",
             "name": "david",
-            "picture": "",
+            "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373301/mr-brilli/orange-glasses.jpg",
             "price": 89.9,
             "stock": 10
         },
         {
             "_id": "sun_5",
-            "name": "Thomas",
-            "picture": "",
+            "name": "thomas",
+            "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373302/mr-brilli/white-bkg.jpg",
             "price": 129.9,
             "stock": 10
         },
         {
             "_id": "sun_6",
-            "name": "Sarah",
-            "picture": "",
+            "name": "sarah",
+            "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/big-glasses.jpg",
             "price": 99.9,
             "stock": 10
         }

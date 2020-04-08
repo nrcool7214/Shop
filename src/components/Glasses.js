@@ -16,7 +16,7 @@ const Glasses = () => {
 
         <div className="glasses-bk">
             <header className="header">
-                <Link className="to-home" to="/"><h1 className="color-red">Mr <FontAwesomeIcon style={{ transform: `rotate(-90deg)`, marginRight: '-0.4rem', filter: 'drop-shadow(-1px 2px 0px rgb(41, 40, 0))' }} icon={faGlasses} />rilli</h1></Link>
+                <Link className="to-home" to="/"><h1 className="logo-red">Mr <FontAwesomeIcon style={{ transform: `rotate(-90deg)`, marginRight: '-0.4rem', filter: 'drop-shadow(-1px 2px 0px rgb(41, 40, 0))' }} icon={faGlasses} />rilli</h1></Link>
             </header>
             <section className="section-glasses">
                 {

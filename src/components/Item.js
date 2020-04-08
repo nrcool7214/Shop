@@ -10,8 +10,8 @@ const Item = ({ properties }) => {
         <div className="card">
             <h3>{name}</h3>
             <img src={picture} alt="" />
-            <p>{price}</p>
-            <p>{stock}</p>
+            <p>{price} €</p>
+            <p>{stock} x</p>
         </div>
     )
 };

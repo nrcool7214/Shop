@@ -1,5 +1,5 @@
 {
-  "name": "shop-app",
+  "name": "mr-brilli-app",
   "version": "1.0.0",
   "description": "des",
   "scripts": {
@@ -9,9 +9,17 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
+    "node-sass": "^4.13.1",
     "react": "^16.12.0",
+    "react-awesome-slider": "^4.1.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.4.0"
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "redux": "^4.0.5"
   },
   "eslintConfig": {
     "extends": "react-app"

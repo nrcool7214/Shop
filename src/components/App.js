@@ -15,20 +15,25 @@ const App = () => {
         <main>
           <div className="dividing-box">
             <div className="glasses">
-              <div className="circle">
-                <h2>GLASSES</h2>
-              </div>
+              <Link className="link-to-section" to="/glasses">
+                <div className="circle">
+                  <h2>GLASSES</h2>
+                </div>
+              </Link>
             </div>
             <div className="sunglasses">
-              <div className="light">
-              </div>
-              <div className="circle circle-sun">
-                <h2>SUNGLASSES</h2>
-              </div>
+              <Link className="link-to-section" to="/sunglasses">
+                <div className="light"></div>
+                <div className="circle circle-sun">
+                  <h2>SUNGLASSES</h2>
+                </div>
+              </Link>
             </div>
           </div>
         </main>
       </div>
+      {/* <Route path="/glasses" exact component={Glasses} />
+      <Route path="/glasses" exact component={Sunglasses} /> */}
     </BrowserRouter>
   );
 }

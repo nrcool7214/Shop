@@ -6,8 +6,6 @@ import { faGlasses } from '@fortawesome/free-solid-svg-icons'
 
 const App = () => {
 
-  const AutoplaySlider = withAutoplay(AwesomeSlider);
-
   return (
     <BrowserRouter>
       <div className="app">

@@ -99,6 +99,12 @@ main {
     .glasses {
         width: 100%;
         height: 50%;
+
+        .circle-view:hover {
+            background-color: rgba(13, 219, 202, 0.4);
+            color: #fff;
+            transition: 0.4s;
+        }
         
         @media screen and (min-width: 1000px) {
             width: 50%;
@@ -110,6 +116,7 @@ main {
             background-position: left;
             filter: blur(8px);
             cursor: pointer;
+            transition: 0.4s;
         
             &:hover {
                 filter: blur(0);
@@ -118,13 +125,15 @@ main {
                     filter: blur(0);
                 }
             }
-        }
 
-        .circle-view {
-            filter: blur(5px);
-
-            &:hover {
-                filter: blur(0)
+            .circle-view {
+                filter: blur(5px);
+    
+                &:hover {
+                    filter: blur(0);
+                    background-color: rgba(255, 255, 255, 0.8);
+                    color: #000;
+                }
             }
         }
     }
@@ -151,9 +160,10 @@ main {
                 position: absolute;
                 top: 0;
                 right: 0;
+                transition: 0.4s;
 
                 &:hover {
-                    background-color: rgba(59, 19, 0, 0.384);
+                    background-color: rgba(59, 19, 0, 0.4);
                 }
             }
         }
@@ -164,6 +174,7 @@ main {
 
             &:hover {
                 background-color: rgba(59, 19, 0, 0.9);
+                transition: 0.4s;
             }
         }
     }

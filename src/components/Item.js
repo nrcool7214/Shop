@@ -8,11 +8,19 @@ const Item = ({ properties }) => {
 
     return (
         <div className="card">
-            <h3 className="glasses-name">{name}</h3>
-            <img className="glasses-picture" src={picture} alt="" />
-            <div className="info">
-                <p>{price} €</p>
-                <p>{stock} x</p>
+            <div className="face-one">
+                <div className="title">
+                    <h3 className="glasses-name">{name}</h3>
+                </div>
+                <div className="content">
+                    <img className="glasses-picture" src={picture} alt="" />
+                </div>
+            </div>
+            <div className="face-two">
+                <div className="info">
+                    <p>{price} €</p>
+                    <button>ADD</button>
+                </div>
             </div>
         </div>
     )

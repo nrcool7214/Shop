@@ -43,7 +43,7 @@ const Item = ({ properties }) => {
             <div className="face-two">
                 <div className="info">
                     <p>{price} €</p>
-                    <button onClick={addToCart}>ADD TO CART</button>
+                    <button className="active-button" onClick={addToCart}>ADD TO CART</button>
                 </div>
             </div>
         </div>

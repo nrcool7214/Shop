@@ -12,22 +12,22 @@ a {
 }
 
 header {
-    width: 100%;
+    width: auto;
     height: 15vh;
     position: absolute;
-    top: 0;
-    left: 0;
+    left: 50%;
+    transform: translate(-50%);
     background-color: transparent;
     color: rgb(0, 0, 0);
-    z-index: 3;
+    z-index: 100;
     text-align: center;
     padding-top: 1.5rem;
 
     h1 {
         font-family: 'Josefin Sans', sans-serif;
         font-size: 3rem;
-        color: yellow;
-        text-shadow: 2px 2px rgb(41, 40, 0);
+        color: rgb(7, 104, 104);
+        // text-shadow: 2px 2px rgb(41, 40, 0);
     }
 }
 

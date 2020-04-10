@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGlasses } from '@fortawesome/free-solid-svg-icons';
 import Glasses from './Glasses';
 import Sunglasses from './Sunglasses';
+import Cart from './Cart';
 
 const App = () => {
 
@@ -17,7 +18,7 @@ const App = () => {
       <BrowserRouter>
         <div className="app">
           <header className="header">
-            <h1>Mr <FontAwesomeIcon style={{ transform: `rotate(-90deg)`, marginRight: '-0.4rem', filter: 'drop-shadow(-1px 2px 0px rgb(41, 40, 0))' }} icon={faGlasses} />rilli</h1>
+            <Link className="to-home" to="/"><h1 className="logo-blue">Mr <FontAwesomeIcon style={{ transform: `rotate(-90deg)`, marginRight: '-0.4rem' }} icon={faGlasses} />rilli</h1></Link>
           </header>
           <main>
             <div className="dividing-box">
@@ -45,6 +46,9 @@ const App = () => {
           </Route>
           <Route path="/sunglasses">
             <Sunglasses />
+          </Route>
+          <Route path="/cart">
+            <Cart />
           </Route>
         </Switch>
       </BrowserRouter>

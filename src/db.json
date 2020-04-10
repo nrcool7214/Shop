@@ -102,6 +102,18 @@
     {
       "itemAddedName": "hannah",
       "itemAddedPrice": 89.9
+    },
+    {
+      "itemAddedName": "george",
+      "itemAddedPrice": 99.9
+    },
+    {
+      "itemAddedName": "george",
+      "itemAddedPrice": 99.9
+    },
+    {
+      "itemAddedName": "hannah",
+      "itemAddedPrice": 89.9
     }
   ]
 }

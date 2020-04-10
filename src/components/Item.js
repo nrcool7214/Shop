@@ -1,13 +1,16 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { ContextTotal } from './Context';
+import React, { useContext } from 'react';
+import { ContextTotal, ContextCart } from './Context';
 import '../styles/Item.scss';
 
 const Item = ({ properties }) => {
     // properties passed to create each card
     const { _id, name, picture, price, stock } = properties;
 
-    // context variable, now stored in const total
+    // context variables
     const { total, setTotal } = useContext(ContextTotal);
+
+    const { cart, setCart } = useContext(ContextCart);
+    // console.log(cart);
 
     const addToCart = (item) => {
         item.preventDefault();
@@ -23,12 +26,12 @@ const Item = ({ properties }) => {
             .then(res => res.json())
             .then(res1 => {
                 const response = res1.status;
+                console.log(response);
                 let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice, 0).toFixed(2);
                 setTotal(newTotal);
+                setCart(response);
             })
     };
-
-    // useEffect(() => console.log('TOTAL: ', total));
 
     return (
         <div className="card">

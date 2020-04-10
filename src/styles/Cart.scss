@@ -1,3 +1,42 @@
+h4 {
+    text-align: center;
+}
+
+.titles-cart {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+
+    p {
+        font-size: 1rem;
+        padding-bottom: 1rem;
+
+        @media screen and (min-width: 470px) {
+            font-size: 1.1rem;
+        }
+    }
+}
+
+.total-cart {
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-top: 1rem;
+    font-weight: 600;
+}
+
+.item-in-cart {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+
+    @media screen and (min-width: 470px) {
+        font-size: 1.5rem;
+    }
+}
+
 .cart-bk {
     width: 100%;
     min-height: 100vh;
@@ -7,4 +46,104 @@
     left: 0;
     z-index: 10;
     font-family: 'Josefin Sans', sans-serif;
+    
+    @media screen and (min-width: 920px) {
+        padding: 1rem 10rem 10rem;
+    }
+}
+
+.section-cart {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 20vh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 920px) {
+        padding: 1rem 10rem 5rem;
+    }
+}
+
+.overview {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    margin: 1rem auto 3rem;
+
+    .underscore {
+        width: calc(100% - 160px);
+        height: 1rem;
+        border-bottom: 1px dotted grey;
+    }
+}
+
+form {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(4, 1fr);
+    grid-gap: 1rem 3rem;
+    padding: 1rem 1rem 2rem;
+    margin: 1rem 0;
+
+    input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-bottom: 1px solid rgb(145, 145, 145);
+        padding: 0.3rem;
+        font-size: 1rem;
+
+        @media screen and (min-width: 470px) {
+                font-size: 1.1rem;
+        }
+
+        &::placeholder {
+            color: rgba(90, 90, 90, 0.5);
+            font-family: 'Josefin Sans', sans-serif;
+            text-transform: uppercase;
+
+            @media screen and (min-width: 470px) {
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    .first-name {
+        grid-area: 1/1/2/3;
+    }
+
+    .second-name {
+        grid-area: 1/3/2/5;
+    }
+
+    .address {
+        grid-area: 2/1/3/3;
+    }
+
+    .address-nr {
+        grid-area: 2/3/3/4;
+    }
+
+    .address-post {
+        grid-area: 2/4/3/5;
+    }
+
+    .submit-btn {
+        grid-area: 3/2/-1/4;
+        
+        #submit-btn {
+            position: relative;
+            top: 1rem;
+
+            &:active {
+                position: relative;
+                top: calc(1rem + 2px);
+                box-shadow: none;
+                background-color: rgb(160, 45, 0);
+            }
+        }
+    }
 }

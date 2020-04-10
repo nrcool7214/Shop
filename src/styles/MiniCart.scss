@@ -1,0 +1,16 @@
+.minicart {
+    
+    position: absolute;
+    left: 50%;
+    top: 6rem;
+    transform: translateX(-50%);
+
+    p {
+        width: 10rem;
+    }
+    @media screen and(min-width: 570px){
+        left: 75%;
+        top: 2.8rem;
+        transform: translateX(0);
+    }
+}

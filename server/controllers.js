@@ -6,18 +6,51 @@ const getIndexHTML = (req, res) => {
     res.sendFile(path.resolve(__dirname, "../build/index.html"))
 };
 
+// ALL INFORMATION RELATED TO THE CART:
+
 const addToCart = (req, res) => {
     // console.log(req);
     let itemAdded = db.get('Products').find({ _id: req.body._id }).value();
     let itemAddedName = itemAdded.name;
     let itemAddedPrice = itemAdded.price;
     let itemAddedId = itemAdded._id;
+
+    itemAdded.stock = itemAdded.stock - 1;
+    db.get('Products').assign(itemAdded).write();
+
     let cart = db.get('Cart').value();
     db.get('Cart').push({ itemAddedId, itemAddedName, itemAddedPrice }).write();
-    // console.log(itemAdded);
+    console.log(itemAdded);
     // console.log(itemAdded.name);
     res.json({ status: cart });
 }
+
+const removeItem = (req, res) => {
+    // console.log('REQ.PARAMS: ', req.params);
+    let itemRemoved = db.get('Products').find({ _id: req.params._id }).value();
+    itemRemoved.stock = itemRemoved.stock + 1;
+    db.get('Products').assign(itemRemoved).write();
+
+    let cart = db.get('Cart').value();
+    let newCart = cart.filter(el => el.itemAddedId !== req.params._id);
+    // console.log(newCart);
+    db.get('Cart').remove().write();
+    db.get('Cart').assign(newCart).write()
+    console.log('CART: ', cart);
+    res.json({ status: cart });
+}
+
+const removeAllItems = (req, res) => {
+    let allProducts = db.get('Products').value();
+    allProducts.map(el => el.stock = 10);
+    db.get('Products').assign(allProducts).write()
+
+    db.get('Cart').remove().write();
+    let cart = db.get('Cart').value();
+    res.json({ status: cart });
+}
+
+// USER INFORMATION:
 
 // const findStudentById = (req, res) => {
 //     console.log(req.params.id);
@@ -51,21 +84,5 @@ const addToCart = (req, res) => {
 //     res.send('student changed')
 // }
 
-const removeItem = (req, res) => {
-    // console.log('REQ.PARAMS: ', req.params);
-    let cart = db.get('Cart').value();
-    let newCart = cart.filter(el => el.itemAddedId !== req.params._id);
-    // console.log(newCart);
-    db.get('Cart').remove().write();
-    db.get('Cart').assign(newCart).write()
-    console.log('CART: ', cart);
-    res.json({ status: cart });
-}
-
-const removeAllItems = (req, res) => {
-    db.get('Cart').remove().write();
-    let cart = db.get('Cart').value();
-    res.json({ status: cart });
-}
 
 module.exports = { getIndexHTML, addToCart, removeItem, removeAllItems };

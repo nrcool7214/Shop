@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import '../styles/Cart.scss';
 import { ContextCart, ContextTotal } from './Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
 
@@ -75,7 +75,7 @@ const Cart = () => {
                             itemsInCart
                         }
                         <li className="titles-cart total-cart">
-                            <button className="active-button" onClick={removeAllItems}>REMOVE ALL</button>
+                            <button className="active-button" onClick={removeAllItems}>REMOVE ALL <FontAwesomeIcon icon={faTrashAlt} style={{ marginLeft: '0.3rem' }} /></button>
                         </li>
                         <li className="titles-cart total-cart">
                             <p>Total: {total}€</p>

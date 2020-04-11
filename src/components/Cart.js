@@ -1,18 +1,73 @@
 import React, { useContext } from 'react';
 import '../styles/Cart.scss';
 import { ContextCart, ContextTotal } from './Context';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
 
     const { cart, setCart } = useContext(ContextCart);
     const { total, setTotal } = useContext(ContextTotal);
 
+    const removeItem = (item) => {
+        console.log('IM PASSING THIS: ', item);
+
+        let itemId = cart.find(el => (el.itemAddedId === item.itemAddedId)).itemAddedId;
+        console.log('ITEM_ID: ', itemId);
+
+        setCart(cart.filter(el => el.itemAddedId !== item.itemAddedId));
+        setTotal(total - item.itemAddedPrice.toFixed(2));
+
+        const options = {
+            method: 'DELETE',
+            body: itemId
+        };
+
+        fetch(`/remove/${itemId}`, options)
+            .then(res => res.json())
+            .then(res1 => {
+                const response = res1.status;
+                console.log('RESPONSE FROM SERVER:', response);
+                // let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice, 0).toFixed(2);
+                // setTotal(newTotal);
+                // setCart(response);
+            })
+
+        // useEffect(() => {
+        //     effect
+        //     return () => {
+        //         cleanup
+        //     };
+        // }, [input]);
+    }
+
+    // const addToCart = (item) => {
+    //     item.preventDefault();
+    //     const data = { _id };
+    //     const options = {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(data)
+    //     };
+    //     fetch('/addtocart', options)
+    //         .then(res => res.json())
+    //         .then(res1 => {
+    //             const response = res1.status;
+    //             console.log(response);
+    //             let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice, 0).toFixed(2);
+    //             setTotal(newTotal);
+    //             setCart(response);
+    //         })
+    // };
+
     const itemsInCart = cart.map((el, i) => {
         return (
             <li className="item-in-cart" key={i}>
                 <p>{el.itemAddedName}</p>
                 <p className="underscore"></p>
-                <p>{el.itemAddedPrice.toFixed(2)}€</p>
+                <p>{el.itemAddedPrice.toFixed(2)}€ <FontAwesomeIcon className="remove-item" icon={faTimes} onClick={() => removeItem(el)} /></p>
             </li>
         )
     })

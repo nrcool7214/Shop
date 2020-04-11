@@ -1,9 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { ContextSunglasses } from './Context';
 import '../styles/Sunglasses.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlasses } from '@fortawesome/free-solid-svg-icons';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Item from './Item';
 import MiniCart from './MiniCart';
 

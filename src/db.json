@@ -98,30 +98,5 @@
     }
   ],
   "Users": [],
-  "Cart": [
-    {
-      "itemAddedName": "josephine",
-      "itemAddedPrice": 89.9
-    },
-    {
-      "itemAddedName": "brandon",
-      "itemAddedPrice": 99.9
-    },
-    {
-      "itemAddedName": "josephine",
-      "itemAddedPrice": 89.9
-    },
-    {
-      "itemAddedName": "josephine",
-      "itemAddedPrice": 89.9
-    },
-    {
-      "itemAddedName": "paula",
-      "itemAddedPrice": 119.9
-    },
-    {
-      "itemAddedName": "josephine",
-      "itemAddedPrice": 89.9
-    }
-  ]
+  "Cart": []
 }

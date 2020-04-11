@@ -5,6 +5,7 @@ h4 {
 .titles-cart {
     width: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     text-transform: uppercase;
 
@@ -15,6 +16,16 @@ h4 {
         @media screen and (min-width: 470px) {
             font-size: 1.1rem;
         }
+    }
+}
+
+.remove-item {
+    color: red;
+    font-size: 1.1rem;
+    cursor: pointer;
+    
+    @media screen and (min-width: 470px) {
+        font-size: 1.5rem;
     }
 }
 
@@ -31,6 +42,7 @@ h4 {
     align-items: center;
     justify-content: space-between;
     font-size: 1.1rem;
+    padding: 0.5rem 0;
 
     @media screen and (min-width: 470px) {
         font-size: 1.5rem;
@@ -73,7 +85,7 @@ h4 {
     margin: 1rem auto 3rem;
 
     .underscore {
-        width: calc(100% - 160px);
+        width: calc(100% - 230px);
         height: 1rem;
         border-bottom: 1px dotted grey;
     }

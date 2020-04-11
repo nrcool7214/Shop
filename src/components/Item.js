@@ -4,7 +4,7 @@ import '../styles/Item.scss';
 
 const Item = ({ properties }) => {
     // properties passed to create each card
-    const { _id, name, picture, price, stock } = properties;
+    const { _id, name, picture, price } = properties;
 
     // context variables
     const { total, setTotal } = useContext(ContextTotal);
@@ -26,8 +26,8 @@ const Item = ({ properties }) => {
             .then(res => res.json())
             .then(res1 => {
                 const response = res1.status;
-                console.log(response);
-                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice, 0).toFixed(2);
+                console.log('RESPONSE FROM SERVER:', response);
+                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.quantity, 0).toFixed(2);
                 setTotal(newTotal);
                 setCart(response);
             })

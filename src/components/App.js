@@ -11,10 +11,10 @@ import Cart from './Cart';
 const App = () => {
 
   const [total, setTotal] = useState(0);
-  console.log('TOTAL: ', total);
+  // console.log('TOTAL: ', total);
 
   const [cart, setCart] = useState([]);
-  console.log('CART ITEMS: ', cart);
+  // console.log('CART ITEMS: ', cart);
 
   return (
     <ContextTotal.Provider value={{ total, setTotal }}>

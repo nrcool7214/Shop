@@ -5,7 +5,8 @@
       "name": "josephine",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/dark-colors.jpg",
       "price": 89.9,
-      "stock": 10,
+      "initial_stock": 10,
+      "stock": 7,
       "type": "view"
     },
     {
@@ -13,6 +14,7 @@
       "name": "brandon",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/brothers.jpg",
       "price": 99.9,
+      "initial_stock": 10,
       "stock": 10,
       "type": "view"
     },
@@ -21,6 +23,7 @@
       "name": "lisa",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373302/mr-brilli/with-flowers.jpg",
       "price": 79.9,
+      "initial_stock": 10,
       "stock": 10,
       "type": "view"
     },
@@ -29,6 +32,7 @@
       "name": "martha",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373301/mr-brilli/hut-leave.jpg",
       "price": 99.9,
+      "initial_stock": 10,
       "stock": 10,
       "type": "view"
     },
@@ -37,6 +41,7 @@
       "name": "marty",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/boy-colors-indoor.jpg",
       "price": 109.9,
+      "initial_stock": 10,
       "stock": 10,
       "type": "view"
     },
@@ -45,6 +50,7 @@
       "name": "xia",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/girl-colors-indoor.jpg",
       "price": 89.9,
+      "initial_stock": 10,
       "stock": 10,
       "type": "view"
     },
@@ -53,6 +59,7 @@
       "name": "paula",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373302/mr-brilli/yellow-bkg.jpg",
       "price": 119.9,
+      "initial_stock": 10,
       "stock": 10,
       "type": "sun"
     },
@@ -61,7 +68,8 @@
       "name": "george",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/black-white.jpg",
       "price": 99.9,
-      "stock": 10,
+      "initial_stock": 10,
+      "stock": 7,
       "type": "sun"
     },
     {
@@ -69,7 +77,8 @@
       "name": "hannah",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373301/mr-brilli/glasses-and-hut.jpg",
       "price": 89.9,
-      "stock": 10,
+      "initial_stock": 10,
+      "stock": 8,
       "type": "sun"
     },
     {
@@ -77,6 +86,7 @@
       "name": "david",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373301/mr-brilli/orange-glasses.jpg",
       "price": 89.9,
+      "initial_stock": 10,
       "stock": 10,
       "type": "sun"
     },
@@ -85,6 +95,7 @@
       "name": "thomas",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373302/mr-brilli/white-bkg.jpg",
       "price": 129.9,
+      "initial_stock": 10,
       "stock": 10,
       "type": "sun"
     },
@@ -93,10 +104,24 @@
       "name": "sarah",
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/big-glasses.jpg",
       "price": 99.9,
+      "initial_stock": 10,
       "stock": 10,
       "type": "sun"
     }
   ],
   "Users": [],
-  "Cart": []
+  "Cart": [
+    {
+      "itemAddedId": "gla_1",
+      "itemAddedName": "josephine",
+      "itemAddedPrice": 89.9,
+      "quantity": 3
+    },
+    {
+      "itemAddedId": "sun_2",
+      "itemAddedName": "george",
+      "itemAddedPrice": 99.9,
+      "quantity": 3
+    }
+  ]
 }

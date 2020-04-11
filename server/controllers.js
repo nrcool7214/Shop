@@ -18,9 +18,47 @@ const addToCart = (req, res) => {
     itemAdded.stock = itemAdded.stock - 1;
     db.get('Products').assign(itemAdded).write();
 
+    let quantity = itemAdded.initial_stock - itemAdded.stock;
+
     let cart = db.get('Cart').value();
-    db.get('Cart').push({ itemAddedId, itemAddedName, itemAddedPrice }).write();
-    console.log(itemAdded);
+
+    console.log('CART BEFORE: ', cart);
+
+    if (cart.length === 0) {
+        console.log('MESSAGE: IT WAS NULL');
+        // cart.push({ itemAddedId, itemAddedName, itemAddedPrice, quantity }); 
+        db.get('Cart').push({ itemAddedId, itemAddedName, itemAddedPrice, quantity }).write();
+        // res.json({ status: cart });
+    } else {
+        cart.map(el => {
+            if (el.itemAddedId === req.body._id) {
+                console.log('MESSAGE: QUANTITY + 1');
+                console.log('REQ.BODY.ID: ', req.body._id);
+                console.log('ELEMENT: ', el);
+                let itemUpdated = db.get('Cart').find({ itemAddedId: req.body._id }).value();
+                itemUpdated.quantity += 1;
+                // console.log('itemUpdated: ', itemUpdated);
+                db.get('Cart').remove(el).write();
+                db.get('Cart').push(itemUpdated).write();
+                // db.get('Cart').push({ itemAddedId, itemAddedName, itemAddedPrice, quantity }).write();
+
+                // db.get('Cart').find({ itemAddedId: req.body._id }).value().unset(itemUpdated).write();
+                // db.get('Cart').find({ itemAddedId: req.body._id }).value()
+                // .assign(itemUpdated).write();
+                // res.json({ status: cart });
+            } else {
+                console.log('MESSAGE: NORMAL PUSH');
+                // cart.push({ itemAddedId, itemAddedName, itemAddedPrice, quantity });
+                db.get('Cart').push({ itemAddedId, itemAddedName, itemAddedPrice, quantity }).write();
+                // res.json({ status: cart });
+            }
+        })
+    };
+    console.log('CART AFTER: ', cart);
+
+    // db.get('Cart').push({ itemAddedId, itemAddedName, itemAddedPrice, quantity }).write();
+    console.log('LAST ITEM ADDED TO CART: ', itemAdded);
+
     // console.log(itemAdded.name);
     res.json({ status: cart });
 }

@@ -58,7 +58,14 @@ const removeItem = (req, res) => {
     // console.log(newCart);
     db.get('Cart').remove().write();
     db.get('Cart').assign(newCart).write()
-    res.json(newCart);
+    console.log('CART: ', cart);
+    res.json({ status: cart });
 }
 
-module.exports = { getIndexHTML, addToCart, removeItem };
+const removeAllItems = (req, res) => {
+    db.get('Cart').remove().write();
+    let cart = db.get('Cart').value();
+    res.json({ status: cart });
+}
+
+module.exports = { getIndexHTML, addToCart, removeItem, removeAllItems };

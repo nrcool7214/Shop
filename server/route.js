@@ -1,5 +1,5 @@
 const Route = require('express').Router()
-const { getIndexHTML, addToCart, removeItem } = require('./controllers')
+const { getIndexHTML, addToCart, removeItem, removeAllItems } = require('./controllers')
 
 Route.get("/", getIndexHTML);
 Route.get("/glasses", getIndexHTML);
@@ -16,6 +16,8 @@ Route.post("/addtocart", addToCart)
 
 // Route.put('/updatebyid/:id', changeStudent)
 
-Route.delete('/remove/:_id', removeItem)
+Route.delete('/remove/:_id', removeItem);
+
+Route.delete('/removeall', removeAllItems);
 
 module.exports = Route;

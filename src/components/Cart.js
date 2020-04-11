@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import '../styles/Cart.scss';
 import { ContextCart, ContextTotal } from './Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,7 @@ const Cart = () => {
     const { total, setTotal } = useContext(ContextTotal);
 
     const removeItem = (item) => {
-        console.log('IM PASSING THIS: ', item);
+        // console.log('IM PASSING THIS: ', item);
 
         let itemId = cart.find(el => (el.itemAddedId === item.itemAddedId)).itemAddedId;
         console.log('ITEM_ID: ', itemId);
@@ -27,40 +27,29 @@ const Cart = () => {
             .then(res => res.json())
             .then(res1 => {
                 const response = res1.status;
-                console.log('RESPONSE FROM SERVER:', response);
-                // let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice, 0).toFixed(2);
-                // setTotal(newTotal);
-                // setCart(response);
+                // console.log('RESPONSE FROM SERVER:', response);
+                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice, 0).toFixed(2);
+                setTotal(newTotal);
+                setCart(response);
             })
+    };
 
-        // useEffect(() => {
-        //     effect
-        //     return () => {
-        //         cleanup
-        //     };
-        // }, [input]);
-    }
+    const removeAllItems = () => {
 
-    // const addToCart = (item) => {
-    //     item.preventDefault();
-    //     const data = { _id };
-    //     const options = {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(data)
-    //     };
-    //     fetch('/addtocart', options)
-    //         .then(res => res.json())
-    //         .then(res1 => {
-    //             const response = res1.status;
-    //             console.log(response);
-    //             let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice, 0).toFixed(2);
-    //             setTotal(newTotal);
-    //             setCart(response);
-    //         })
-    // };
+        const options = {
+            method: 'DELETE'
+        };
+
+        fetch('/removeall', options)
+            .then(res => res.json())
+            .then(res1 => {
+                const response = res1.status;
+                console.log('RESPONSE FROM SERVER:', response);
+                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice, 0).toFixed(2);
+                setTotal(newTotal);
+                setCart(response);
+            })
+    };
 
     const itemsInCart = cart.map((el, i) => {
         return (
@@ -70,7 +59,7 @@ const Cart = () => {
                 <p>{el.itemAddedPrice.toFixed(2)}€ <FontAwesomeIcon className="remove-item" icon={faTimes} onClick={() => removeItem(el)} /></p>
             </li>
         )
-    })
+    });
 
     return (
         <div className="cart-bk">
@@ -85,6 +74,9 @@ const Cart = () => {
                         {
                             itemsInCart
                         }
+                        <li className="titles-cart total-cart">
+                            <button className="active-button" onClick={removeAllItems}>REMOVE ALL</button>
+                        </li>
                         <li className="titles-cart total-cart">
                             <p>Total: {total}€</p>
                         </li>

@@ -41,15 +41,15 @@ const addToCart = (req, res) => {
 }
 
 const removeItem = (req, res) => {
-    console.log('REQ.PARAMS: ', req.params);
+    // console.log('REQ.PARAMS: ', req.params);
     const requestedId = req.params._id;
 
     const requestedProduct = db.get('Products').find({ _id: requestedId }).value();
-    console.log('REQ_PROD: ', requestedProduct);
+    // console.log('REQ_PROD: ', requestedProduct);
     requestedProduct.stock += 1;
     db.get('Products').assign(requestedProduct).write();
 
-    console.log('CART BEFORE: ', db.get('Cart').value());
+    // console.log('CART BEFORE: ', db.get('Cart').value());
 
     let cart = db.get('Cart').value();
 
@@ -62,7 +62,7 @@ const removeItem = (req, res) => {
     }
 
     db.get('Cart').assign(cart).write();
-    console.log('CART NOW: ', cart);
+    // console.log('CART NOW: ', cart);
     res.send({ status: cart });
 }
 
@@ -78,37 +78,7 @@ const removeAllItems = (req, res) => {
 
 // USER INFORMATION:
 
-// const findStudentById = (req, res) => {
-//     console.log(req.params.id);
-//     let studentById = db.get('Students').find({ id: parseInt(req.params.id) }).value()
-//     // let user = Students.find(student => student.id === Number(req.params.id))
-//     res.json(studentById)
-// }
-
-// const addNewStudent = (req, res) => {
-//     console.log(req.body);
-
-//     db.get('Students').push(req.body).write()
-//     let allStudents = db.get('Students').value()
-//     res.json(allStudents);
-// }
-
-// const updateStudent = (req, res) => {
-//     console.log(req.params.name);
-//     let student = db.get('Students').find({ name: req.params.name }).value();
-
-//     student.age = student.age + 1
-//     db.get('Students').assign(student).write()
-
-//     res.json(student);
-// }
-
-// const changeStudent = (req, res) => {
-//     console.log(req.params);
-//     console.log(req.body);
-//     db.get('Students').find({ id: parseInt(req.params.id) }).assign(req.body).write()
-//     res.send('student changed')
-// }
+// to do
 
 
 module.exports = { getIndexHTML, addToCart, removeItem, removeAllItems };

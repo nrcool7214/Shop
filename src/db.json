@@ -15,7 +15,7 @@
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/brothers.jpg",
       "price": 99.9,
       "initial_stock": 10,
-      "stock": 10,
+      "stock": 9,
       "type": "view"
     },
     {
@@ -60,7 +60,7 @@
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373302/mr-brilli/yellow-bkg.jpg",
       "price": 119.9,
       "initial_stock": 10,
-      "stock": 10,
+      "stock": 11,
       "type": "sun"
     },
     {

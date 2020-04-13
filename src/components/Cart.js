@@ -27,8 +27,8 @@ const Cart = () => {
             .then(res => res.json())
             .then(res1 => {
                 const response = res1.status;
-                // console.log('RESPONSE FROM SERVER:', response);
-                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddeditemAddedQuantity, 0).toFixed(2);
+                console.log('RESPONSE FROM SERVER:', response);
+                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2);
                 setTotal(newTotal);
                 setCart(response);
             })

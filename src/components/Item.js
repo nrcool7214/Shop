@@ -27,7 +27,7 @@ const Item = ({ properties }) => {
             .then(res1 => {
                 const response = res1.status;
                 console.log('RESPONSE FROM SERVER:', response);
-                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.quantity, 0).toFixed(2);
+                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2);
                 setTotal(newTotal);
                 setCart(response);
             })

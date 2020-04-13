@@ -28,7 +28,7 @@ const Cart = () => {
             .then(res1 => {
                 const response = res1.status;
                 // console.log('RESPONSE FROM SERVER:', response);
-                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.quantity, 0).toFixed(2);
+                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddeditemAddedQuantity, 0).toFixed(2);
                 setTotal(newTotal);
                 setCart(response);
             })
@@ -54,9 +54,9 @@ const Cart = () => {
     const itemsInCart = cart.map((el, i) => {
         return (
             <li className="item-in-cart" key={i}>
-                <p>{el.itemAddedName} {`(${el.quantity}x)`}</p>
+                <p>{el.itemAddedName} {`(${el.itemAddedQuantity}x)`}</p>
                 <p className="underscore"></p>
-                <p>{(el.quantity * el.itemAddedPrice).toFixed(2)}€ <FontAwesomeIcon className="remove-item" icon={faTimes} onClick={() => removeItem(el)} /></p>
+                <p>{(el.itemAddedQuantity * el.itemAddedPrice).toFixed(2)}€ <FontAwesomeIcon className="remove-item" icon={faTimes} onClick={() => removeItem(el)} /></p>
             </li>
         )
     });

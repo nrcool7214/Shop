@@ -1,4 +1,3 @@
-// const Students = require('../models/students')
 const path = require('path')
 const db = require('./database')
 
@@ -8,74 +7,89 @@ const getIndexHTML = (req, res) => {
 
 // ALL INFORMATION RELATED TO THE CART:
 
+
 const addToCart = (req, res) => {
-    // console.log(req);
-    let itemAdded = db.get('Products').find({ _id: req.body._id }).value();
-    let itemAddedName = itemAdded.name;
-    let itemAddedPrice = itemAdded.price;
-    let itemAddedId = itemAdded._id;
+    // console.log('REQ: ', req);
+    const requestedId = req.body._id;
+    console.log('REQ_ID: ', req.body._id);
 
-    itemAdded.stock = itemAdded.stock - 1;
-    db.get('Products').assign(itemAdded).write();
+    const requestedProduct = db.get('Products').find({ _id: requestedId }).value();
+    console.log('REQ_PROD: ', requestedProduct);
+    requestedProduct.stock -= 1;
+    db.get('Products').assign(requestedProduct).write();
 
-    let quantity = itemAdded.initial_stock - itemAdded.stock;
+    const itemAddedId = requestedProduct._id;
+    const itemAddedName = requestedProduct.name;
+    const itemAddedPrice = requestedProduct.price;
+    const itemAddedQuantity = requestedProduct.initial_stock - requestedProduct.stock;
+    let itemAdded = { itemAddedId, itemAddedName, itemAddedPrice, itemAddedQuantity };
+    console.log('itemAdded: ', itemAdded);
+    console.log('CART BEFORE: ', db.get('Cart').value());
 
     let cart = db.get('Cart').value();
 
-    console.log('CART BEFORE: ', cart);
+    const itemAddedIndex = cart.findIndex((el => el.itemAddedId === requestedId));
+    console.log('itemAddedIndex: ', itemAddedIndex);
+    if (itemAddedIndex !== -1) {
+        console.log('ITEMADDEDQUANTITYYYYYYYYY: ', cart[itemAddedIndex].itemAddedQuantity)
+        cart[itemAddedIndex].itemAddedQuantity += 1;
 
-    if (cart.length === 0) {
-        console.log('MESSAGE: IT WAS NULL');
-        // cart.push({ itemAddedId, itemAddedName, itemAddedPrice, quantity }); 
-        db.get('Cart').push({ itemAddedId, itemAddedName, itemAddedPrice, quantity }).write();
-        // res.json({ status: cart });
     } else {
-        cart.map(el => {
-            if (el.itemAddedId === req.body._id) {
-                console.log('MESSAGE: QUANTITY + 1');
-                console.log('REQ.BODY.ID: ', req.body._id);
-                console.log('ELEMENT: ', el);
-                let itemUpdated = db.get('Cart').find({ itemAddedId: req.body._id }).value();
-                itemUpdated.quantity += 1;
-                // console.log('itemUpdated: ', itemUpdated);
-                db.get('Cart').remove(el).write();
-                db.get('Cart').push(itemUpdated).write();
-                // db.get('Cart').push({ itemAddedId, itemAddedName, itemAddedPrice, quantity }).write();
+        cart.push(itemAdded);
+    }
 
-                // db.get('Cart').find({ itemAddedId: req.body._id }).value().unset(itemUpdated).write();
-                // db.get('Cart').find({ itemAddedId: req.body._id }).value()
-                // .assign(itemUpdated).write();
-                // res.json({ status: cart });
-            } else {
-                console.log('MESSAGE: NORMAL PUSH');
-                // cart.push({ itemAddedId, itemAddedName, itemAddedPrice, quantity });
-                db.get('Cart').push({ itemAddedId, itemAddedName, itemAddedPrice, quantity }).write();
-                // res.json({ status: cart });
-            }
-        })
-    };
-    console.log('CART AFTER: ', cart);
-
-    // db.get('Cart').push({ itemAddedId, itemAddedName, itemAddedPrice, quantity }).write();
-    console.log('LAST ITEM ADDED TO CART: ', itemAdded);
-
-    // console.log(itemAdded.name);
+    db.get('Cart').assign(cart).write()
+    console.log('CART: ', cart);
     res.json({ status: cart });
 }
 
 const removeItem = (req, res) => {
-    // console.log('REQ.PARAMS: ', req.params);
+    console.log('REQ.PARAMS: ', req.params);
     let itemRemoved = db.get('Products').find({ _id: req.params._id }).value();
-    itemRemoved.stock = itemRemoved.stock + 1;
+    console.log('ITEM TO BE REMOVED: ', itemRemoved);
+    itemRemoved.stock += 1;
+    console.log('ITEM TO BE REMOVED (STOCK): ', itemRemoved);
     db.get('Products').assign(itemRemoved).write();
 
-    let cart = db.get('Cart').value();
+    console.log('THIS IS THE CART: ', cart);
     let newCart = cart.filter(el => el.itemAddedId !== req.params._id);
+    console.log('THIS IS THE NEW-CART: ', newCart);
+
+    // let itemUpdated = cart.find(el => el.itemAddedId === req.params._id);
+    // console.log('ITEM TO BE UPDATED: ', itemUpdated);
+    // if (itemUpdated.quantity !== 1) {
+    //     itemUpdated.quantity -= 1;
+    //     newCart.push(itemUpdated);
+    //     db.get('Cart').remove().write();
+    //     db.get('Cart').assign(newCart).write()
+    // } else {
+    //     db.get('Cart').assign(newCart).write()
+    //     console.log('CART: ', cart);
+    //     db.get('Cart').remove().write();
+    // }
+    // res.send({ status: cart });
+
+
+    cart.forEach(el => {
+        if (el.itemAddedId === req.params._id) {
+            console.log('MESSAGE: QUANTITY - 1');
+            console.log('REQ.BODY.ID: ', req.params._id);
+            console.log('ELEMENT: ', el);
+            if (el.quantity === 1) {
+                console.log('ITEM QUANTITY === 1');
+                db.get('Cart').remove().write();
+                db.get('Cart').assign(newCart).write()
+            } else {
+                console.log('ITEM QUANTITY !== 1');
+                el.quantity -= 1;
+                newCart.push(el);
+            }
+        }
+    })
+
     // console.log(newCart);
-    db.get('Cart').remove().write();
-    db.get('Cart').assign(newCart).write()
-    console.log('CART: ', cart);
-    res.json({ status: cart });
+    // db.get('Cart').remove().write();
+    res.send({ status: cart })
 }
 
 const removeAllItems = (req, res) => {

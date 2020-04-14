@@ -27,7 +27,7 @@ const addToCart = (req, res) => {
 
     let cart = db.get('Cart').value();
 
-    const itemAddedIndex = cart.findIndex((el => el.itemAddedId === requestedId));
+    const itemAddedIndex = cart.findIndex(el => el.itemAddedId === requestedId);
     // console.log('itemAddedIndex: ', itemAddedIndex);
     if (itemAddedIndex !== -1) {
         cart[itemAddedIndex].itemAddedQuantity += 1;
@@ -53,12 +53,12 @@ const removeItem = (req, res) => {
 
     let cart = db.get('Cart').value();
 
-    const itemAddedIndex = cart.findIndex((el => el.itemAddedId === requestedId));
-    // console.log('itemAddedIndex: ', itemAddedIndex);
+    const itemAddedIndex = cart.findIndex(el => el.itemAddedId === requestedId);
+    console.log('itemAddedIndex: ', itemAddedIndex);
     if (cart[itemAddedIndex].itemAddedQuantity > 1) {
         cart[itemAddedIndex].itemAddedQuantity -= 1;
     } else {
-        cart.splice(cart[itemAddedIndex], 1);
+        cart.splice(itemAddedIndex, 1);
     }
 
     db.get('Cart').assign(cart).write();

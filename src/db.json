@@ -60,7 +60,7 @@
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373302/mr-brilli/yellow-bkg.jpg",
       "price": 119.9,
       "initial_stock": 10,
-      "stock": 9,
+      "stock": 10,
       "type": "sun"
     },
     {
@@ -69,7 +69,7 @@
       "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/black-white.jpg",
       "price": 99.9,
       "initial_stock": 10,
-      "stock": 9,
+      "stock": 10,
       "type": "sun"
     },
     {
@@ -110,18 +110,5 @@
     }
   ],
   "Users": [],
-  "Cart": [
-    {
-      "itemAddedId": "sun_1",
-      "itemAddedName": "Sun_A01",
-      "itemAddedPrice": 119.9,
-      "itemAddedQuantity": 1
-    },
-    {
-      "itemAddedId": "sun_3",
-      "itemAddedName": "Sun_C03",
-      "itemAddedPrice": 89.9,
-      "itemAddedQuantity": 1
-    }
-  ]
+  "Cart": []
 }

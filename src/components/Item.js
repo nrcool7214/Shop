@@ -22,7 +22,7 @@ const Item = ({ properties }) => {
             },
             body: JSON.stringify(data)
         };
-        fetch('/addtocart', options)
+        fetch('http://localhost:4000/addtocart', options)
             .then(res => res.json())
             .then(res1 => {
                 const response = res1.status;

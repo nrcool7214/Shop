@@ -6,6 +6,7 @@ import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
 
+
     const { cart, setCart } = useContext(ContextCart);
     const { total, setTotal } = useContext(ContextTotal);
     const [registration, setRegistration] = useState('not registered');
@@ -62,6 +63,7 @@ const Cart = () => {
         )
     });
 
+    
     return (
         <div className="cart-bk">
             <section className="section-cart">

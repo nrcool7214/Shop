@@ -18,10 +18,10 @@ const addToCart = (req, res) => {
     // console.log('REQ: ', req);
     const requestedId = req.body._id;
 
-    const requestedProduct = db.get('Products').find({ _id: requestedId }).value();
-    // console.log('REQ_PROD: ', requestedProduct);
+    const requestedProduct = db.get('All.Products').find({ _id: requestedId }).value();
+ console.log('REQ_PROD: ', requestedProduct);
     requestedProduct.stock -= 1;
-    db.get('Products').assign(requestedProduct).write();
+    db.get('All.Products').assign(requestedProduct).write();
 
     const itemAddedId = requestedProduct._id;
     const itemAddedName = requestedProduct.name;
@@ -30,9 +30,9 @@ const addToCart = (req, res) => {
     let itemAddedStock = requestedProduct.stock;
     let itemAdded = { itemAddedId, itemAddedName, itemAddedPrice, itemAddedQuantity, itemAddedStock };
     // console.log('itemAdded: ', itemAdded);
-    console.log('CART BEFORE: ', db.get('Cart').value());
+    console.log('CART BEFORE: ', db.get('All.Cart').value());
 
-    let cart = db.get('Cart').value();
+    let cart = db.get('All.Cart').value();
 
     const itemAddedIndex = cart.findIndex(el => el.itemAddedId === requestedId);
     // console.log('itemAddedIndex: ', itemAddedIndex);
@@ -44,7 +44,7 @@ const addToCart = (req, res) => {
         cart.push(itemAdded);
     }
 
-    db.get('Cart').assign(cart).write()
+    db.get('All.Cart').assign(cart).write()
     console.log('CART NOW: ', cart);
     res.json({ cart: cart });
 }
@@ -53,14 +53,14 @@ const removeItem = (req, res) => {
     // console.log('REQ.PARAMS: ', req.params);
     const requestedId = req.params._id;
 
-    const requestedProduct = db.get('Products').find({ _id: requestedId }).value();
+    const requestedProduct = db.get('All.Products').find({ _id: requestedId }).value();
     // console.log('REQ_PROD: ', requestedProduct);
     requestedProduct.stock += 1;
-    db.get('Products').assign(requestedProduct).write();
+    db.get('All.Products').assign(requestedProduct).write();
 
     // console.log('CART BEFORE: ', db.get('Cart').value());
 
-    let cart = db.get('Cart').value();
+    let cart = db.get('All.Cart').value();
 
     const itemAddedIndex = cart.findIndex(el => el.itemAddedId === requestedId);
     console.log('itemAddedIndex: ', itemAddedIndex);
@@ -70,20 +70,20 @@ const removeItem = (req, res) => {
         cart.splice(itemAddedIndex, 1);
     }
 
-    db.get('Cart').assign(cart).write();
+    db.get('All.Cart').assign(cart).write();
     // console.log('CART NOW: ', cart);
     res.json({ cart: cart });
 }
 
 const removeAllItems = (req, res) => {
-    let allProducts = db.get('Products').value();
+    let allProducts = db.get('All.Products').value();
     allProducts.map(el => el.stock = 10);
-    db.get('Products').assign(allProducts).write()
+    db.get('All.Products').assign(allProducts).write()
 
     let cart = db.get('Cart').value();
     cart = [];
-    db.get('Cart').remove().write();
-    db.get('Cart').assign(cart).write()
+    db.get('All.Cart').remove().write();
+    db.get('All.Cart').assign(cart).write()
     res.json({ cart: cart });
 }
 

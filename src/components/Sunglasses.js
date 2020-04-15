@@ -8,8 +8,8 @@ import MiniCart from './MiniCart';
 
 const Sunglasses = () => {
 
-    const sunglasses = useContext(ContextSunglasses);
-
+    const { sunGlasses } = useContext(ContextSunglasses);
+    console.log(sunGlasses)
     // context variables
     const { setTotal } = useContext(ContextTotal);
 
@@ -45,7 +45,7 @@ const Sunglasses = () => {
         cart[itemAddedIndex].itemAddedStock <= 0 && setDisabledButton(true);
     };
 
-    const allSunglasses = sunglasses.map((el, i) => <Item key={el.name} properties={sunglasses[i]} addToCart={addToCart} isOutOfStock={isOutOfStock} />);
+    const allSunglasses = sunGlasses.map((el, i) => <Item key={el.name} properties={sunGlasses[i]} addToCart={addToCart} isOutOfStock={isOutOfStock} />);
 
 
     console.log('SUNGLASSES RENDERING...')

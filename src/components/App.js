@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ContextTotal, ContextCart, ContextStock } from './Context';
+import { ContextTotal, ContextCart, ContextStock,ContextSunglasses } from './Context';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import '../styles/App.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,14 +18,19 @@ const App = () => {
   // console.log('CART ITEMS: ', cart);
   const [disabledButton, setDisabledButton] = useState(false);
 
+  //sunglasses
+  const [sunGlasses, setSunGlasses]=useState(null)
+
   async function getdb() {
     try {
       let DB = await fetch('/getdb');
       console.log(DB);
       let DBFinal = await DB.json();
       console.log('DBFinal: ', DBFinal);
-      setCart(DBFinal);
+      setCart(DBFinal.Cart);
       setTotal(DBFinal.Cart.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2));
+      setSunGlasses(DBFinal.Products)
+      console.log(sunGlasses, cart ,total)
     } catch (err) {
       console.log('ERROR!!: ', err);
     }
@@ -33,12 +38,14 @@ const App = () => {
 
   useEffect(() => {
     getdb()
+    console.log(sunGlasses, cart ,total)
   }, []);
 
   return (
     <ContextTotal.Provider value={{ total, setTotal }}>
       <ContextCart.Provider value={{ cart, setCart }}>
         <ContextStock.Provider value={{ disabledButton, setDisabledButton }}>
+          <ContextSunglasses.Provider value={{sunGlasses}}> 
           <BrowserRouter>
             <div className="app">
               <header className="header">
@@ -76,6 +83,7 @@ const App = () => {
               </Route>
             </Switch>
           </BrowserRouter>
+          </ContextSunglasses.Provider>
         </ContextStock.Provider>
       </ContextCart.Provider>
     </ContextTotal.Provider>

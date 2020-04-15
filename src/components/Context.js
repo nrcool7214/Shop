@@ -1,7 +1,5 @@
 import { createContext } from 'react';
 
-
-
 export const ContextTotal = createContext(null);
 
 export const ContextCart = createContext(null);

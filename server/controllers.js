@@ -5,6 +5,12 @@ const getIndexHTML = (req, res) => {
     res.sendFile(path.resolve(__dirname, "../build/index.html"))
 };
 
+const getDB = (req, res) => {
+    let data = db.get('All').value();
+    console.log(data);
+    res.json(data);
+};
+
 // ALL INFORMATION RELATED TO THE CART:
 
 
@@ -40,7 +46,7 @@ const addToCart = (req, res) => {
 
     db.get('Cart').assign(cart).write()
     console.log('CART NOW: ', cart);
-    res.send({ cart: cart });
+    res.json({ cart: cart });
 }
 
 const removeItem = (req, res) => {
@@ -66,7 +72,7 @@ const removeItem = (req, res) => {
 
     db.get('Cart').assign(cart).write();
     // console.log('CART NOW: ', cart);
-    res.send({ cart: cart });
+    res.json({ cart: cart });
 }
 
 const removeAllItems = (req, res) => {
@@ -78,7 +84,7 @@ const removeAllItems = (req, res) => {
     cart = [];
     db.get('Cart').remove().write();
     db.get('Cart').assign(cart).write()
-    res.send({ cart: cart });
+    res.json({ cart: cart });
 }
 
 // USER INFORMATION:
@@ -86,4 +92,4 @@ const removeAllItems = (req, res) => {
 // to do
 
 
-module.exports = { getIndexHTML, addToCart, removeItem, removeAllItems };
+module.exports = { getIndexHTML, getDB, addToCart, removeItem, removeAllItems };

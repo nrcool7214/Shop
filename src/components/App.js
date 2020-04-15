@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ContextTotal, ContextCart, ContextStock } from './Context';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import '../styles/App.scss';
@@ -7,18 +7,33 @@ import { faGlasses } from '@fortawesome/free-solid-svg-icons';
 import Glasses from './Glasses';
 import Sunglasses from './Sunglasses';
 import Cart from './Cart';
-import DB from '../db.json';
 
 const App = () => {
 
-  const [total, setTotal] = useState(DB.Cart.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2));
+
+  const [total, setTotal] = useState(null)
   // console.log('TOTAL: ', total);
 
-  const [cart, setCart] = useState(DB.Cart);
+  const [cart, setCart] = useState(null);
   // console.log('CART ITEMS: ', cart);
   const [disabledButton, setDisabledButton] = useState(false);
 
-  console.log('APP RENDERING...')
+  async function getdb() {
+    try {
+      let DB = await fetch('/getdb');
+      console.log(DB);
+      let DBFinal = await DB.json();
+      console.log('DBFinal: ', DBFinal);
+      setCart(DBFinal);
+      setTotal(DBFinal.Cart.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2));
+    } catch (err) {
+      console.log('ERROR!!: ', err);
+    }
+  };
+
+  useEffect(() => {
+    getdb()
+  }, []);
 
   return (
     <ContextTotal.Provider value={{ total, setTotal }}>

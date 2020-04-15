@@ -2,6 +2,7 @@
   "name": "mr-brilli-app",
   "version": "1.0.0",
   "description": "des",
+  "homepage": ".",
   "scripts": {
     "start": "concurrently \"react-scripts start\" \"node server/server.js\"",
     "build": "react-scripts build",

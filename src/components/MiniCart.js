@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { ContextTotal } from './Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +9,10 @@ import Cart from './Cart';
 
 const MiniCart = () => {
 
-    const { total, setTotal } = useContext(ContextTotal);
+    const { total } = useContext(ContextTotal);
+    // console.log('PRINT TOTAL: ', total);
+
+    console.log('MINICART RENDERING...')
 
     return (
         <div className="minicart">

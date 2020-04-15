@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ContextViewglasses } from './Context';
+import { ContextViewglasses, ContextTotal, ContextCart, ContextStock } from './Context';
 import '../styles/Glasses.scss';
 import { Route } from 'react-router-dom';
 import Item from './Item';
@@ -10,7 +10,53 @@ const Glasses = () => {
 
     const glasses = useContext(ContextViewglasses);
 
-    const allGlasses = glasses.map((el, i) => <Item key={el._id} properties={glasses[i]} />);
+    // context variables
+    const { setTotal } = useContext(ContextTotal);
+
+    const { cart, setCart } = useContext(ContextCart);
+    // console.log(cart);
+
+    const { setDisabledButton } = useContext(ContextStock);
+
+    const addToCart = (e, item) => {
+        e.preventDefault();
+        console.log('ADD TO CART IS RUNNING');
+        const data = item;
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+        fetch('http://localhost:4000/addtocart', options)
+            .then(res => res.json())
+            .then(res1 => {
+                const response = res1.cart;
+                console.log('RESPONSE FROM SERVER:', response);
+                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2);
+                setTotal(newTotal);
+                setCart(response);
+            })
+
+        console.log('CART BEFORE', cart);
+    };
+
+    const isOutOfStock = (e, itemId) => {
+        e.preventDefault();
+        console.log('ISOUTOFSTOCK IS RUNNING');
+        console.log(e);
+        console.log(itemId._id);
+        console.log(cart);
+        const itemAddedIndex = cart.findIndex(el => el.itemAddedId === itemId);
+        console.log(itemAddedIndex);
+        cart[itemAddedIndex].itemAddedStock <= 0 && setDisabledButton(true);
+    };
+
+    const allGlasses = glasses.map((el, i) => <Item key={el._id} properties={glasses[i]} addToCart={addToCart} isOutOfStock={isOutOfStock} />);
+
+
+    console.log('GLASSES RENDERING...')
 
     return (
 

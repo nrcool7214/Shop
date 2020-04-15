@@ -21,23 +21,26 @@ const addToCart = (req, res) => {
     const itemAddedName = requestedProduct.name;
     const itemAddedPrice = requestedProduct.price;
     const itemAddedQuantity = requestedProduct.initial_stock - requestedProduct.stock;
-    let itemAdded = { itemAddedId, itemAddedName, itemAddedPrice, itemAddedQuantity };
+    let itemAddedStock = requestedProduct.stock;
+    let itemAdded = { itemAddedId, itemAddedName, itemAddedPrice, itemAddedQuantity, itemAddedStock };
     // console.log('itemAdded: ', itemAdded);
-    // console.log('CART BEFORE: ', db.get('Cart').value());
+    console.log('CART BEFORE: ', db.get('Cart').value());
 
     let cart = db.get('Cart').value();
 
     const itemAddedIndex = cart.findIndex(el => el.itemAddedId === requestedId);
     // console.log('itemAddedIndex: ', itemAddedIndex);
     if (itemAddedIndex !== -1) {
+        cart[itemAddedIndex].itemAddedStock -= 1;
         cart[itemAddedIndex].itemAddedQuantity += 1;
     } else {
+        itemAddedStock -= 1;
         cart.push(itemAdded);
     }
 
     db.get('Cart').assign(cart).write()
-    // console.log('CART NOW: ', cart);
-    res.send({ status: cart });
+    console.log('CART NOW: ', cart);
+    res.send({ cart: cart });
 }
 
 const removeItem = (req, res) => {
@@ -63,7 +66,7 @@ const removeItem = (req, res) => {
 
     db.get('Cart').assign(cart).write();
     // console.log('CART NOW: ', cart);
-    res.send({ status: cart });
+    res.send({ cart: cart });
 }
 
 const removeAllItems = (req, res) => {
@@ -71,9 +74,11 @@ const removeAllItems = (req, res) => {
     allProducts.map(el => el.stock = 10);
     db.get('Products').assign(allProducts).write()
 
-    db.get('Cart').remove().write();
     let cart = db.get('Cart').value();
-    res.send({ status: cart });
+    cart = [];
+    db.get('Cart').remove().write();
+    db.get('Cart').assign(cart).write()
+    res.send({ cart: cart });
 }
 
 // USER INFORMATION:

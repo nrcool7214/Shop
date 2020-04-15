@@ -27,10 +27,10 @@ const Cart = () => {
         fetch(`http://localhost:4000/remove/${itemId}`, options)
             .then(res => res.json())
             .then(res1 => {
-                const response = res1.status;
+                const response = res1.cart;
                 console.log('RESPONSE FROM SERVER:', response);
                 let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2);
-                setTotal(newTotal);
+                newTotal ? setTotal(newTotal) : setTotal(0);
                 setCart(response);
             })
     };
@@ -41,10 +41,10 @@ const Cart = () => {
             method: 'DELETE'
         };
 
-        fetch('/removeall', options)
+        fetch('http://localhost:4000/removeall', options)
             .then(res => res.json())
             .then(res1 => {
-                const response = res1.status;
+                const response = res1.cart;
                 console.log('RESPONSE FROM SERVER:', response);
                 let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice, 0).toFixed(2);
                 setTotal(newTotal);

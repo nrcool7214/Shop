@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ContextSunglasses } from './Context';
+import { ContextSunglasses, ContextTotal, ContextCart, ContextStock } from './Context';
 import '../styles/Sunglasses.scss';
 import { Route } from 'react-router-dom';
 import Item from './Item';
@@ -10,8 +10,45 @@ const Sunglasses = () => {
 
     const sunglasses = useContext(ContextSunglasses);
 
-    const allSunglasses = sunglasses.map((el, i) => <Item key={el.name} properties={sunglasses[i]} />);
+    // context variables
+    const { setTotal } = useContext(ContextTotal);
 
+    const { cart, setCart } = useContext(ContextCart);
+    // console.log(cart);
+
+    const { setDisabledButton } = useContext(ContextStock);
+
+    const addToCart = (e, item) => {
+        e.preventDefault();
+        const data = item;
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+        fetch('http://localhost:4000/addtocart', options)
+            .then(res => res.json())
+            .then(res1 => {
+                const response = res1.cart;
+                console.log('RESPONSE FROM SERVER:', response);
+                let newTotal = response.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2);
+                setTotal(newTotal);
+                setCart(response);
+            })
+    };
+
+    const isOutOfStock = (e, itemId) => {
+        e.preventDefault();
+        const itemAddedIndex = cart.findIndex(el => el.itemAddedId === itemId);
+        cart[itemAddedIndex].itemAddedStock <= 0 && setDisabledButton(true);
+    };
+
+    const allSunglasses = sunglasses.map((el, i) => <Item key={el.name} properties={sunglasses[i]} addToCart={addToCart} isOutOfStock={isOutOfStock} />);
+
+
+    console.log('SUNGLASSES RENDERING...')
 
     return (
 

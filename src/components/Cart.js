@@ -1,16 +1,18 @@
 import React, { useContext, useState, Fragment } from 'react';
 import '../styles/Cart.scss';
-import { ContextCart, ContextTotal } from './Context';
+import {ContextTotal } from './Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
 
 
-    const { cart, setCart } = useContext(ContextCart);
-    const { total, setTotal } = useContext(ContextTotal);
+   /*  const { cart, setCart } = useContext(ContextCart);
+    const { total, setTotal } = useContext(ContextTotal); */
     const [registration, setRegistration] = useState('not registered');
 
+
+    const { cart, setCart,total, setTotal } = useContext(ContextTotal);
     const removeItem = (item) => {
         // console.log('IM PASSING THIS: ', item);
 
@@ -53,7 +55,7 @@ const Cart = () => {
             })
     };
 
-    const itemsInCart = cart.map((el, i) => {
+    const itemsInCart = cart && cart.map((el, i) => {
         return (
             <li className="item-in-cart" key={i}>
                 <p>{el.itemAddedName} {`(${el.itemAddedQuantity}x)`}</p>

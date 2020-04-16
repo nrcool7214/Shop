@@ -1,12 +1,14 @@
-import React from 'react';
+import React ,{useContext} from 'react';
 import '../styles/Item.scss';
+//added context
+import {ContextTotal} from "./Context"
 
-const Item = ({ properties, addToCart, isOutOfStock, disabledButton }) => {
+const Item = ({ properties, addToCart, isOutOfStock }) => {
     // properties passed to create each card
     const { _id, name, picture, price } = properties;
+    const {disabledButton } = useContext(ContextTotal)
 
-
-    console.log('ITEM RENDERING...')
+    console.log('ITEM RENDERING...',disabledButton )
 
     return (
         <div className="card">
@@ -21,7 +23,7 @@ const Item = ({ properties, addToCart, isOutOfStock, disabledButton }) => {
             <div className="face-two">
                 <div className="info">
                     <p>{price} €</p>
-                    <button className="active-button" onClick={(e) => { e.preventDefault(); addToCart(e, { _id }); isOutOfStock(e, { _id }); }} disabled={disabledButton}>{disabledButton ? 'OUT OF STOCK' : 'ADD TO CART'}</button>
+                    <button className="active-button" onClick={(e) => { e.preventDefault(); addToCart(e,  {_id} ); isOutOfStock(e,  {_id} ); }} disabled={disabledButton}>{disabledButton ? 'OUT OF STOCK' : 'ADD TO CART'}</button>
                 </div>
             </div>
         </div>

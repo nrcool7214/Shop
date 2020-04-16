@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ContextViewglasses, ContextTotal, ContextCart, ContextStock } from './Context';
+import { ContextTotal } from './Context';
 import '../styles/Glasses.scss';
 import { Route } from 'react-router-dom';
 import Item from './Item';
@@ -8,7 +8,7 @@ import MiniCart from './MiniCart';
 
 const Glasses = () => {
 
-    const glasses = useContext(ContextViewglasses);
+/*     const glasses = useContext(ContextViewglasses);
 
     // context variables
     const { setTotal } = useContext(ContextTotal);
@@ -16,8 +16,13 @@ const Glasses = () => {
     const { cart, setCart } = useContext(ContextCart);
     // console.log(cart);
 
-    const { setDisabledButton } = useContext(ContextStock);
+    const { setDisabledButton } = useContext(ContextStock); */
 
+
+
+    const { setTotal,cart, setCart,setDisabledButton, sunGlasses } = useContext(ContextTotal);
+    
+    
     const addToCart = (e, item) => {
         e.preventDefault();
         console.log('ADD TO CART IS RUNNING');
@@ -48,12 +53,11 @@ const Glasses = () => {
         console.log(e);
         console.log(itemId._id);
         console.log(cart);
-        const itemAddedIndex = cart.findIndex(el => el.itemAddedId === itemId);
-        console.log(itemAddedIndex);
-        cart[itemAddedIndex].itemAddedStock <= 0 && setDisabledButton(true);
-    };
+        const itemAddedIndex = cart.findIndex(el => el.itemAddedId === itemId._id);
+        cart[itemAddedIndex].itemAddedStock <= 1 && setDisabledButton(true);
+};
 
-    const allGlasses = glasses.map((el, i) => <Item key={el._id} properties={glasses[i]} addToCart={addToCart} isOutOfStock={isOutOfStock} />);
+    const allGlasses =sunGlasses && sunGlasses.map((el, i) => <Item key={el._id} properties={sunGlasses[i]} addToCart={addToCart} isOutOfStock={isOutOfStock} />);
 
 
     console.log('GLASSES RENDERING...')

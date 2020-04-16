@@ -1,51 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { ContextTotal, ContextCart, ContextStock,ContextSunglasses } from './Context';
+import React from 'react';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import '../styles/App.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGlasses } from '@fortawesome/free-solid-svg-icons';
+import Cart from './Cart';
+import Container from "./Container"
 import Glasses from './Glasses';
 import Sunglasses from './Sunglasses';
-import Cart from './Cart';
 
 const App = () => {
-
-
-  const [total, setTotal] = useState(null)
-  // console.log('TOTAL: ', total);
-
-  const [cart, setCart] = useState(null);
-  // console.log('CART ITEMS: ', cart);
-  const [disabledButton, setDisabledButton] = useState(false);
-
-  //sunglasses
-  const [sunGlasses, setSunGlasses]=useState(null)
-
-  async function getdb() {
-    try {
-      let DB = await fetch('/getdb');
-      console.log(DB);
-      let DBFinal = await DB.json();
-      console.log('DBFinal: ', DBFinal);
-      setCart(DBFinal.Cart);
-      setTotal(DBFinal.Cart.reduce((acc, el) => acc += el.itemAddedPrice * el.itemAddedQuantity, 0).toFixed(2));
-      setSunGlasses(DBFinal.Products)
-      console.log(sunGlasses, cart ,total)
-    } catch (err) {
-      console.log('ERROR!!: ', err);
-    }
-  };
-
-  useEffect(() => {
-    getdb()
-    console.log(sunGlasses, cart ,total)
-  }, []);
-
   return (
-    <ContextTotal.Provider value={{ total, setTotal }}>
-      <ContextCart.Provider value={{ cart, setCart }}>
-        <ContextStock.Provider value={{ disabledButton, setDisabledButton }}>
-          <ContextSunglasses.Provider value={{sunGlasses}}> 
+        <Container>
           <BrowserRouter>
             <div className="app">
               <header className="header">
@@ -72,21 +37,18 @@ const App = () => {
               </main>
             </div>
             <Switch>
-              <Route path="/glasses">
-                <Glasses />
-              </Route>
-              <Route path="/sunglasses">
-                <Sunglasses />
-              </Route>
-              <Route path="/cart">
-                <Cart />
-              </Route>
+              <Route path="/glasses" component={Glasses}/>
+             {/*    <Glasses/>
+              </Route> */}
+              <Route path="/sunglasses" component={Sunglasses}/>
+              {/*   <Sunglasses/>
+              </Route> */}
+              <Route path="/cart" component={Cart}/>
+             {/*    <Cart />
+              </Route> */}
             </Switch>
           </BrowserRouter>
-          </ContextSunglasses.Provider>
-        </ContextStock.Provider>
-      </ContextCart.Provider>
-    </ContextTotal.Provider>
+          </Container>
   );
 }
 

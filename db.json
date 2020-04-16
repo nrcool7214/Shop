@@ -16,7 +16,7 @@
         "picture": "https://res.cloudinary.com/jimbocloud/image/upload/v1586373300/mr-brilli/brothers.jpg",
         "price": 99.9,
         "initial_stock": 10,
-        "stock": 10,
+        "stock": 0,
         "type": "view"
       },
       {
@@ -111,6 +111,14 @@
       }
     ],
     "Users": [],
-    "Cart": []
+    "Cart": [
+      {
+        "itemAddedId": "gla_2",
+        "itemAddedName": "View_B02",
+        "itemAddedPrice": 99.9,
+        "itemAddedQuantity": 10,
+        "itemAddedStock": 0
+      }
+    ]
   }
 }

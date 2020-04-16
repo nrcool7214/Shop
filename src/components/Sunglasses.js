@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ContextSunglasses, ContextTotal, ContextCart, ContextStock } from './Context';
+import { ContextTotal } from './Context';
 import '../styles/Sunglasses.scss';
 import { Route } from 'react-router-dom';
 import Item from './Item';
@@ -8,16 +8,17 @@ import MiniCart from './MiniCart';
 
 const Sunglasses = () => {
 
-    const { sunGlasses } = useContext(ContextSunglasses);
-    console.log(sunGlasses)
-    // context variables
-    const { setTotal } = useContext(ContextTotal);
+    /*     const { sunGlasses } = useContext(ContextSunglasses);
+        console.log(sunGlasses)
+        // context variables
+        const { setTotal } = useContext(ContextTotal);
+    
+        const { cart, setCart } = useContext(ContextCart);
+        // console.log(cart);
+    
+        const { setDisabledButton } = useContext(ContextStock); */
 
-    const { cart, setCart } = useContext(ContextCart);
-    // console.log(cart);
-
-    const { setDisabledButton } = useContext(ContextStock);
-
+    const { sunGlasses, setTotal, cart, setCart, setDisabledButton ,disabledButton,} = useContext(ContextTotal)
     const addToCart = (e, item) => {
         e.preventDefault();
         const data = item;
@@ -41,11 +42,11 @@ const Sunglasses = () => {
 
     const isOutOfStock = (e, itemId) => {
         e.preventDefault();
-        const itemAddedIndex = cart.findIndex(el => el.itemAddedId === itemId);
-        cart[itemAddedIndex].itemAddedStock <= 0 && setDisabledButton(true);
+         const itemAddedIndex = cart.findIndex(el => el.itemAddedId === itemId._id);
+          cart[itemAddedIndex].itemAddedStock <= 1 && setDisabledButton(true);
     };
 
-    const allSunglasses = sunGlasses.map((el, i) => <Item key={el.name} properties={sunGlasses[i]} addToCart={addToCart} isOutOfStock={isOutOfStock} />);
+    const allSunglasses = sunGlasses && sunGlasses.map((el, i) => <Item key={el.name} properties={sunGlasses[i]} addToCart={addToCart} isOutOfStock={isOutOfStock} />);
 
 
     console.log('SUNGLASSES RENDERING...')
